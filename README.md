@@ -2,4 +2,4 @@
 Contains workshop learnings, RTL design examples, synthesis reports, and implementation notes.
 
 Day1-(Topics Covered):
--->introduction to RTL design, testbench, simulator
+-->Introduction to RTL design, testbench, simulator and Lab Setup.
