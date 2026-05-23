@@ -1,4 +1,3 @@
-# Author: Saipoojitha
 
 #  RTL Simulation & Synthesis Basics 🧠
 
