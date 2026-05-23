@@ -33,6 +33,7 @@ A specification is a document describing:
 •	corner cases 
 •	reset behavior 
 •	error handling 
+
 Example Specification for a Counter
 - 4-bit counter
 - increments every clock cycle
@@ -98,8 +99,9 @@ Waveform dump (.vcd)
        ↓
 GTKWave(tool used for displaying the waveform
 (view waveforms).
+--------------------------------------------------------------------------------------------
 
-Points to observed while dealing with RTL code and testbench:
+-->Points to observed while dealing with RTL code and testbench:
 
 RTL modules represent hardware blocks. At an higher SOC level we have a chain of RTL modules interconnected with each to achieve the functionality. So, they usually need ports to communicate with external hardware/modules.
 For ex:
@@ -111,9 +113,11 @@ module adder(
 Here a,b are primary inputs and sum was primary output.
 In testbench no primary inputs/outputs are usually needed. Because every thing that needed for simulating the rtl were generated at the inside of testbench like input stimulus, driving DUT inputs, and monitor DUT outputs. So Nothing exists outside the testbench in simulation.
 
+
 -----------
 Synthesizer
 -----------
+
 When our design meets our expectation in simulation. Then we move to synthesis.
 Synthesis is a process where the RTL design code was converted into netlist of standard cells.
 Yosys is a open-source synthesis tool and can use perform synthesis on current RTL design
@@ -168,4 +172,3 @@ Finally, The synthesis tool generates a gate-level netlist consisting of technol
 - Generated VCD dump file
 - Viewed waveforms using GTKWave
 - Performed synthesis using Yosys
-
