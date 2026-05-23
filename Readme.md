@@ -1,3 +1,4 @@
+
 #  RTL Simulation & Synthesis Basics 🧠
 
 # 📌 What is RTL?
