@@ -1,3 +1,5 @@
+# Author: Saipoojitha
+
 #  RTL Simulation & Synthesis Basics 🧠
 
 # 📌 What is RTL?
