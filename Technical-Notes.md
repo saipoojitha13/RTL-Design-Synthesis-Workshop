@@ -2988,19 +2988,15 @@ Poor RTL coding style can create:
 Unlike flip-flops:
 - latches are transparent when enable is active and output can change immediately with input
 
----
 
-- How Latches Get Inferred Accidentally?
 
-Latches are usually inferred when:
-- combinational logic does NOT assign output in all possible conditions
+- How Latches Get Inferred Accidentally? = Latches are usually inferred when combinational logic does NOT assign output in all possible conditions
 
 This means:
 - output must "remember" previous value
 - synthesis tool adds storage element
 - latch gets inferred
 
----
 
 #### Bad Example : Inferred Latch
 
