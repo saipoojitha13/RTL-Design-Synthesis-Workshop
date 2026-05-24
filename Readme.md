@@ -1,7 +1,7 @@
 
 #  RTL Simulation & Synthesis Basics 🧠
 
-## 📚 Repository Contents
+## Repository Contents
 
 - [1. Spec & RTL Understanding](#1-spec--rtl-understanding)
 - [2. Need for Testbench and RTL Simulation](#2-need-for-testbench-and-rtl-simulation)
@@ -74,9 +74,7 @@ A specification is a document that describes:
 ### Timing Behavior
 - Counter updates on positive edge of clock
 
-
-
----
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 2. Need for Testbench and RTL Simulation
 
@@ -350,6 +348,7 @@ GTKWave
     ↓
 Displays Waveforms
 ```
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 3. Synthesizer and Synthesis Flow
 
@@ -746,7 +745,7 @@ opt_clean -purge
 
 write_verilog design_netlist.v
 ```
-
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 4. RTL vs Gate-Level Netlist Functional Equivalence
 
@@ -1035,7 +1034,7 @@ This applies to:
 
 Whenever a design hierarchy contains multiple modules, all required Verilog files must be included during compilation.
 
-
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 5. Liberty File, Cell Variants, Slack & Cell Selection
 
@@ -1933,6 +1932,7 @@ to balance:
 - area
 - performance
 
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 6. Synthesis vs Simulation Mismatch
 
@@ -1961,7 +1961,7 @@ This is dangerous because:
 
 ---
 
-### 🧠 Why Does This Happen?
+### 🧠 Why Does This mismatch Happen?
 
 Simulation and synthesis tools do not interpret bad RTL code exactly the same way.
 
@@ -2286,6 +2286,8 @@ Synthesized Hardware Output
 - Perform Gate-Level Simulation (GLS)
 
 ---
+
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 7. Blocking vs Non-Blocking Assignments
 
@@ -2674,6 +2676,7 @@ Following this rule helps avoid:
 - race conditions
 - incorrect RTL behavior
 
+[⬆ Back to Repository Contents](#repository-contents)
 
 # 8. Final Understanding
 
@@ -2684,3 +2687,5 @@ Therefore:
 - proper RTL coding style
 - good verification
 - Gate-Level Simulation (GLS) are very important in digital VLSI design.
+
+[⬆ Back to Repository Contents](#repository-contents)
