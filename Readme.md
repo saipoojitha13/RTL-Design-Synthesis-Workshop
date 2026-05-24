@@ -3,14 +3,14 @@
 
 ## 📚 Repository Contents
 
-- [📘 Spec & RTL Understanding](#-spec--rtl-understanding)
-- [🧪 Need for Testbench and RTL Simulation](#-need-for-testbench-and-rtl-simulation)
-- [⚙️ Synthesizer and Synthesis Flow](#️-synthesizer-and-synthesis-flow)
-- [🔄 RTL vs Gate-Level Netlist Functional Equivalence](#-rtl-vs-gate-level-netlist-functional-equivalence)
-- [📖 Liberty File (.lib), Cell Flavours & Slack Understanding](#-liberty-file-lib-cell-flavours--slack-understanding)
-- [⚠️ Synthesis vs Simulation Mismatch](#️-synthesis-vs-simulation-mismatch)
-- [🔀 Blocking vs Non-Blocking Assignments](#-blocking-vs-non-blocking-assignments)
-- [✅ Final Understanding](#-final-understanding)
+- [1. Spec & RTL Understanding](#1-spec--rtl-understanding)
+- [2. Need for Testbench and RTL Simulation](#2-need-for-testbench-and-rtl-simulation)
+- [3. Synthesizer and Synthesis Flow](#3-synthesizer-and-synthesis-flow)
+- [4. RTL vs Gate-Level Netlist Functional Equivalence](#4-rtl-vs-gate-level-netlist-functional-equivalence)
+- [5. Liberty File, Cell Variants, Slack & Cell Selection](#5-liberty-file-cell-variants-slack--cell-selection)
+- [6. Synthesis vs Simulation Mismatch](#6-synthesis-vs-simulation-mismatch)
+- [7. Blocking vs Non-Blocking Assignments](#7-blocking-vs-non-blocking-assignments)
+- [8. Final Understanding](#8-final-understanding)
 
 
 # 1. Spec & RTL understanding
@@ -1037,9 +1037,9 @@ Whenever a design hierarchy contains multiple modules, all required Verilog file
 
 
 
-# 5. Liberty File (.lib) & different flaours of cells, slack and how slack plays a key role while tool picking cells during synth?— Simple Understanding
+# 5. Liberty File, Cell Variants, Slack & Cell Selection
 
-A **Liberty file (`.lib`)** is a standard-cell timing library file used during synthesis and timing analysis.
+ - **Liberty file (`.lib`)** is a standard-cell timing library file used during synthesis and timing analysis.
 
 It contains detailed information about:
 - standard cells
@@ -2675,7 +2675,7 @@ Following this rule helps avoid:
 - incorrect RTL behavior
 
 
-# 🚀 Final Understanding
+# 8. Final Understanding
 
 - Synthesis vs simulation mismatch occurs when RTL simulation behavior and synthesized hardware behavior do not match.
 - This usually happens because simulator executes RTL behavior differently from how synthesis tool converts RTL into actual hardware.
