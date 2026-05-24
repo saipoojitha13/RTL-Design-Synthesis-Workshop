@@ -853,13 +853,8 @@ end
 endmodule
 ```
 
-- Step 1 : Open Yosys
 
-```bash
-yosys
-```
-
-- step 2: performing simulation on RTL
+- step 1: performing simulation on RTL
 
 ```bash
 iverilog good_mux.v tb_good_mux.v
@@ -870,12 +865,18 @@ open the dump using gtkwave and analyze the waveform results
 
 ---
 
-- Step 3 : Run Synthesis Commands
+- Step 2 : Run Synthesis Commands
 
 ```tcl
+yosys
+
+read_liberty -lib skyxyz.lib 
+
 read_verilog good_mux.v
 
 synth -top good_mux
+
+abc -liberty skyxyz.lib 
 
 write_verilog good_mux_netlist.v
 ```
@@ -888,7 +889,7 @@ good_mux_netlist.v
 
 ---
 
-- step 4 : Compile Gate-Level Netlist + Testbench
+- step 3 : Compile Gate-Level Netlist + Testbench
 
 ```bash
 iverilog good_mux_netlist.v tb_good_mux.v
@@ -902,7 +903,7 @@ iverilog good_mux_netlist.v tb_good_mux.v
 ./a.out
 ```
 
-- step5 : Open Waveform of GLS simulation dump and analyze the results by comparing with the previous rtl simulation dump
+- step 4 : Open Waveform of GLS simulation dump and analyze the results by comparing with the previous rtl simulation dump
 
 ```bash
 gtkwave waveform.vcd
