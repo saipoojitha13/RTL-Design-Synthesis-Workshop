@@ -1,7 +1,9 @@
 
 #  RTL Simulation & Synthesis Basics 🧠
 
-# 📌 What is RTL?
+# 1. Spec & RTL understanding
+
+## 📌 What is RTL?
 
 RTL (Register Transfer Level) design describes what hardware should do on every clock edge.
 
@@ -27,7 +29,7 @@ Based on this specification, engineers write RTL code using HDLs such as:
 
 ---
 
-# What is a Specification (Spec)?
+## What is a Specification (Spec)?
 
 A specification is a document that describes:
 - what the design should do
@@ -63,7 +65,7 @@ A specification is a document that describes:
 
 
 
-# 📌 Need for Testbench and RTL Simulation
+# 2. Need for Testbench and RTL Simulation
 
 ### Why RTL Design Needs Verification?
 
@@ -81,7 +83,7 @@ Simulation is used to verify whether the RTL design behaves according to the spe
 
 ---
 
-## What is a Testbench?
+### What is a Testbench?
 
 A testbench is verification code written specifically to test and validate the DUT (Design Under Test).
 
@@ -109,7 +111,7 @@ RTL Design + Testbench
 ________________________________________
 
 
-### 📌 Points to Observe While Dealing with RTL Code and Testbench
+###  📌 Points to Observe While Dealing with RTL Code and Testbench
 
 RTL modules represent actual hardware blocks.  
 At a higher SoC level, multiple RTL modules are interconnected together to achieve the required functionality. Therefore, RTL modules usually require ports to communicate with external hardware blocks or other modules.
@@ -152,15 +154,15 @@ Produces Outputs
    ↓
 Observed/Checked by Testbench
 ```
-## Understanding Important Icarus Verilog Commands
+### Understanding Important Icarus Verilog Commands
 
-#### 1. Compile RTL + Testbench
+- 1. Compile RTL + Testbench
 
 ```bash
 iverilog good_mux.v tb_good_mux.v
 ```
 
-### What this command does:
+- What this command does:
 - Reads RTL and testbench files
 - Checks syntax correctness
 - Elaborates module hierarchy
@@ -169,12 +171,12 @@ iverilog good_mux.v tb_good_mux.v
 By default, Icarus Verilog generates an executable file named:
 
 ```text
-a.out
+./a.out
 ```
 
 ---
 
-### What is `vvp`?
+- here we need to know What is `vvp`?
 
 `vvp` is the runtime engine (simulator backend) used by Icarus Verilog to execute the compiled simulation executable.
 
@@ -192,7 +194,7 @@ Executes the compiled simulation executable
 
 ---
 
-### 2. Run Simulation
+- 2. Run Simulation
 
 In many systems, the generated executable can be run directly using:
 
@@ -212,7 +214,7 @@ Both commands perform the same simulation execution.
 
 ---
 
-### What happens during simulation:
+- What happens during simulation:
 - Testbench starts executing
 - Inputs are applied to DUT
 - RTL logic gets evaluated
@@ -227,19 +229,19 @@ waveform.vcd
 
 ---
 
-### 3. Open Waveform in GTKWave
+- 3. Open Waveform in GTKWave
 
 ```bash
 gtkwave waveform.vcd
 ```
 
-### Purpose:
+- Purpose:
 - Displays signal transitions graphically
 - Helps analyze RTL behavior over time
 
 ---
 
-### Complete Icarus Verilog Simulation Flow
+- Complete Icarus Verilog Simulation Flow
 
 ```text
 RTL + Testbench
@@ -261,7 +263,7 @@ RTL + Testbench
 
 ---
 
-## Commonly Used Icarus Verilog Commands
+### Commonly Used Icarus Verilog Commands
 
 | Command | Purpose |
 |----------|----------|
@@ -274,9 +276,9 @@ RTL + Testbench
 
 ---
 
-## Example Using Custom Executable Name
+### Example Using Custom Executable Name
 
-#### Compile
+- Compile
 
 ```bash
 iverilog -o mux_sim good_mux.v tb_good_mux.v
@@ -338,23 +340,17 @@ GTKWave
 Displays Waveforms
 ```
 
-### Synthesizer and Synthesis Flow
+# 3. Synthesizer and Synthesis Flow
 
 Once the RTL design behaves correctly in simulation, the next step is synthesis.
 
 Synthesis is the process of converting RTL code into a gate-level netlist composed of standard cells such as logic gates and flip-flops.
 
-### What is Yosys?
-
-Yosys is an open-source synthesis tool used to synthesize RTL designs written in Verilog.
-
----
-
-## Basic Synthesis Flow
+### Basic Synthesis Flow
 
 The synthesis process mainly consists of the following stages:
 
-### 1. Parsing
+ 1. Parsing
 Reads the RTL code, checks syntax correctness, and builds an internal representation of the design.
 
 Example command:
@@ -365,12 +361,12 @@ read_verilog design.v
 
 ---
 
-### 2. Elaboration
+ 2. Elaboration
 Resolves module hierarchy, parameters, and connects instantiated modules.
 
 ---
 
-### 3. Optimization
+ 3. Optimization
 Optimizes the design to improve:
 - timing
 - area
@@ -386,7 +382,7 @@ Design constraints guide the synthesis tool during optimization and timing analy
 
 ---
 
-### Timing Analysis and PVT Corners
+- Timing Analysis and PVT Corners
 
 Timing analysis is performed across different PVT (Process, Voltage, Temperature) corners to ensure reliable circuit operation under different manufacturing and environmental conditions.
 
@@ -399,12 +395,12 @@ These variations directly affect circuit timing and performance.
 
 ---
 
-### 4. Technology Mapping
+ 4. Technology Mapping
 Maps generic RTL logic into technology-specific standard cells available in the target library.
 
 ---
 
-### 5. Netlist Generation
+ 5. Netlist Generation
 Generates the synthesized gate-level netlist.
 
 Example command:
@@ -415,7 +411,9 @@ write_verilog netlist.v
 
 ---
 
-## Common Yosys Commands
+### what is yosys ? Common Yosys Commands
+
+- Yosys is an open-source synthesis tool used to synthesize RTL designs written in Verilog.
 
 | Command | Purpose |
 |----------|----------|
@@ -428,7 +426,7 @@ write_verilog netlist.v
 
 ---
 
-## Example Yosys Synthesis Flow
+### Example of Yosys Synthesis Flow
 
 ```tcl
 read_verilog counter.v
@@ -445,7 +443,8 @@ write_verilog counter_netlist.v
 ```
 
 ---
-### Simple Understanding of Synthesis
+
+### Simple Understanding of Synthesis and some special tools
 
 During synthesis, the synthesis tool uses:
 
@@ -455,9 +454,9 @@ During synthesis, the synthesis tool uses:
 
 Finally, the synthesis tool generates a technology-mapped gate-level netlist using standard cells from the target library.
 
-## Some Special Synth Commands
+- Some Special Synth Commands
 
-### 📌 What Does `synth` Do?
+- 1. `synth` 
 
 `synth` is a high-level synthesis command in Yosys.
 
@@ -477,7 +476,7 @@ synth converts RTL into generic synthesized logic
 
 ---
 
-### 🧠 Internally `synth` Performs
+- 🧠 Internally `synth` Performs
 
 Some internal steps include:
 - parsing RTL
@@ -489,7 +488,7 @@ Some internal steps include:
 
 ---
 
-### 📌 Example
+- 📌 Example
 
 RTL:
 
@@ -520,7 +519,7 @@ may also be created.
 
 ---
 
-### 📌 Important Point
+- 📌 Important Point
 
 After `synth`:
 - logic is synthesized
@@ -532,9 +531,9 @@ Technology mapping happens later using:
 
 ---
 
-### dfflibmap Command
+- 2. `dfflibmap Command`
 
-## 📌 Syntax
+- 📌 Syntax
 
 ```tcl
 dfflibmap -liberty skyxyz.lib
@@ -548,7 +547,7 @@ dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80.lib
 
 ---
 
-## 📌 What Does `dfflibmap` Do?
+- 📌 What Does `dfflibmap` Do?
 
 `dfflibmap` maps:
 - generic flip-flops
@@ -561,7 +560,7 @@ from the liberty library.
 
 ---
 
-### 🧠 Why is it Needed?
+- 🧠 Why is it Needed?
 
 After `synth`, Yosys creates generic sequential elements like:
 
@@ -584,7 +583,7 @@ into real library DFF cells
 
 ---
 
-### 📌 Example
+- 📌 Example
 
 Before `dfflibmap`:
 
@@ -603,7 +602,7 @@ Now synthesized netlist contains:
 
 ---
 
-### 📌 Important Point
+- 📌 Important Point
 
 `dfflibmap` handles:
 - sequential logic only
@@ -622,9 +621,9 @@ Those are handled later by:
 
 ---
 
-### opt_clean -purge Command
+- 3. opt_clean -purge Command
 
-### 📌 Syntax
+- 📌 Syntax
 
 ```tcl
 opt_clean -purge
@@ -632,7 +631,7 @@ opt_clean -purge
 
 ---
 
-### 📌 What Does `opt_clean` Do?
+- 📌 What Does `opt_clean` Do?
 
 `opt_clean` removes:
 - unused logic
@@ -649,7 +648,7 @@ Cleanup unnecessary hardware
 
 ---
 
-### 📌 What Does `-purge` Mean?
+- 📌 What Does `-purge` Mean?
 
 The `-purge` option performs:
 - more aggressive cleanup
@@ -661,7 +660,7 @@ It removes:
 
 ---
 
-### Example
+- Example
 
 Suppose RTL contains:
 
@@ -693,7 +692,7 @@ This reduces:
 
 ---
 
-### 📌 Why is Cleanup Important?
+- 📌 Why is Cleanup Important?
 
 During synthesis:
 - many temporary signals
@@ -709,7 +708,7 @@ Cleanup improves:
 
 ---
 
-## Summary of Commands
+- Summary of Commands
 
 | Command | Purpose |
 |---|---|
@@ -719,7 +718,7 @@ Cleanup improves:
 
 ---
 
-# 🚀 Simple Complete Flow
+### 🚀 Simple Complete Flow
 
 ```tcl
 read_verilog design.v
@@ -738,7 +737,7 @@ write_verilog design_netlist.v
 ```
 
 
-## RTL vs Gate-Level Netlist Functional Equivalence
+# 4. RTL vs Gate-Level Netlist Functional Equivalence
 
 After synthesis, the RTL design is converted into a gate-level netlist composed of technology-specific standard cells such as:
 - AND gates
@@ -766,9 +765,8 @@ both RTL simulation and Gate-Level Simulation (GLS) should produce matching outp
 
 This confirms that the synthesis process preserved the intended RTL functionality correctly.
 
----
 
-## What is Gate-Level Simulation (GLS)?
+### What is Gate-Level Simulation (GLS)?
 
 Gate-Level Simulation (GLS) is the process of simulating the synthesized gate-level netlist using a testbench.
 
@@ -781,7 +779,7 @@ GLS helps verify:
 
 ---
 
-## RTL Simulation vs GLS
+- RTL Simulation vs GLS
 
 | RTL Simulation | Gate-Level Simulation (GLS) |
 |----------------|-----------------------------|
@@ -792,7 +790,11 @@ GLS helps verify:
 
 ---
 
-### Example : RTL Design (good_mux.v)
+
+
+### understanding the Generation of Gate-Level Netlist & GLS Using Yosys with one simple example 
+
+- Example : RTL Design (good_mux.v)
 
 ```verilog
 module good_mux(
@@ -814,7 +816,7 @@ endmodule
 
 ---
 
-### Testbench (tb_good_mux.v)
+- Testbench (tb_good_mux.v)
 
 ```verilog
 module tb_good_mux;
@@ -851,19 +853,24 @@ end
 endmodule
 ```
 
----
-
-## Generate Gate-Level Netlist Using Yosys
-
-#### Step 1 : Open Yosys
+- Step 1 : Open Yosys
 
 ```bash
 yosys
 ```
 
+- step 2: performing simulation on RTL
+
+```bash
+iverilog good_mux.v tb_good_mux.v
+./a.out
+Generating tb_good_mux.vcd
+```
+open the dump using gtkwave and analyze the waveform results 
+
 ---
 
-#### Step 2 : Run Synthesis Commands
+- Step 3 : Run Synthesis Commands
 
 ```tcl
 read_verilog good_mux.v
@@ -881,9 +888,7 @@ good_mux_netlist.v
 
 ---
 
-### Gate-Level Simulation (GLS) Using Icarus Verilog
-
-### Compile Gate-Level Netlist + Testbench
+- step 4 : Compile Gate-Level Netlist + Testbench
 
 ```bash
 iverilog good_mux_netlist.v tb_good_mux.v
@@ -891,29 +896,21 @@ iverilog good_mux_netlist.v tb_good_mux.v
 
 ---
 
-### Run Simulation
+- Run Simulation
 
 ```bash
 ./a.out
 ```
 
-OR
-
-```bash
-vvp a.out
-```
-
----
-
-### Open Waveform
+- step5 : Open Waveform of GLS simulation dump and analyze the results by comparing with the previous rtl simulation dump
 
 ```bash
 gtkwave waveform.vcd
 ```
-
+- Note: With the following above 5 steps, we can understand, in design we are verifying have any synthesis-simulation mismatch or not.
 ---
 
-### Complete GLS Flow
+### a simple understanding of Complete GLS Flow
 
 ```text
 RTL Design
@@ -927,7 +924,7 @@ GLS using Icarus Verilog
      ↓
 Waveform Generation
      ↓
-GTKWave Analysis
+GTKWave Analysis and cross-comparing the results of RTL simulation waveform dump
 ```
 
 ---
@@ -975,7 +972,7 @@ Therefore, while compiling, all dependent module files must be included.
 
 ---
 
-### Example Compilation Command
+- Example Compilation Command
 
 ```bash
 iverilog ripple_carry_adder_netlist.v rca.v adder.v tb_rca.v
@@ -989,7 +986,7 @@ Here:
 
 ---
 
-### Why This is Necessary?
+- Why This is Necessary?
 
 During elaboration, the simulator resolves:
 - module hierarchy
@@ -1005,7 +1002,7 @@ Module not found
 
 ---
 
-### Simple Understanding
+- Simple Understanding
 
 ```text
 Top Module
@@ -1019,7 +1016,7 @@ All Related .v Files Must Be Passed
 
 ---
 
-### Important Note
+- Important Note
 
 This applies to:
 - RTL simulation
@@ -1029,7 +1026,7 @@ Whenever a design hierarchy contains multiple modules, all required Verilog file
 
 
 
-## Liberty File (.lib) — Simple Understanding
+# 5. Liberty File (.lib) & different flaours of cells, slack and how slack plays a key role while tool picking cells during synth?— Simple Understanding
 
 A **Liberty file (`.lib`)** is a standard-cell timing library file used during synthesis and timing analysis.
 
@@ -1063,7 +1060,7 @@ Without a liberty file:
 
 ---
 
-### Simple Understanding
+- Simple Understanding
 
 ```text
 RTL Design
@@ -1089,9 +1086,9 @@ This file name itself contains important technology and PVT information.
 
 ---
 
-## Breaking Down the Liberty File Name
+- Breaking Down the Liberty File Name
 
-### 1. sky130
+ 1. sky130
 
 ```text
 sky130
@@ -1109,7 +1106,7 @@ Feature size is roughly:
 
 ---
 
-### 2. fd
+ 2. fd
 
 
 Means:
@@ -1123,7 +1120,7 @@ It indicates the library is provided by the foundry.
 
 ---
 
-### 3. sc
+ 3. sc
 
 Means:
 
@@ -1140,7 +1137,7 @@ These are pre-designed digital logic cells such as:
 
 ---
 
-### 4. hd
+ 4. hd
 
 
 Means:
@@ -1165,7 +1162,7 @@ Each library flavor has different tradeoffs between:
 
 ---
 
-## PVT Corners in Liberty Files
+ 5. PVT Corners in Liberty Files
 
 PVT stands for:
 
@@ -1179,7 +1176,7 @@ Timing behavior changes depending on these conditions.
 
 ---
 
-### Process (P)
+- Process (P)
 
 Process variation occurs due to manufacturing differences in transistors.
 
@@ -1199,7 +1196,7 @@ Common process corners:
 
 ---
 
-### Voltage (V)
+- Voltage (V)
 
 Timing changes with supply voltage.
 
@@ -1219,7 +1216,7 @@ Example:
 
 ---
 
-### Temperature (T)
+- Temperature (T)
 
 Temperature affects transistor performance.
 
@@ -1235,7 +1232,7 @@ Example:
 
 ---
 
-## Understanding Example Completely
+- Understanding Example Completely
 
 ```text
 sky130_fd_sc_hd__tt_025C_1v80.lib
@@ -1253,7 +1250,7 @@ sky130_fd_sc_hd__tt_025C_1v80.lib
 
 ---
 
-## How Liberty File is Used in Yosys
+### How Liberty File is Used in Yosys
 
 Example command:
 
@@ -1269,7 +1266,7 @@ Purpose:
 
 ---
 
-## Important Information Present Inside Liberty File
+- Important Information Present Inside Liberty File
 
 A liberty file contains:
 - cell names
@@ -1284,7 +1281,7 @@ A liberty file contains:
 
 ---
 
-## Simple Final Understanding
+- Simple Final Understanding
 
 ```text
 RTL
@@ -1303,7 +1300,7 @@ Generates Gate-Level Netlist
 The liberty file acts like a hardware behavior database for the synthesis and timing tools.
 
 
-## Standard Cell Libraries and Different Cell Variants
+### Standard Cell Libraries and Different Cell Variants
 
 A liberty file (`.lib`) does not contain only one version of a logic gate.
 
@@ -1334,7 +1331,7 @@ But they differ in:
 
 ---
 
-## General Standard Cell Naming Format
+- Note: General Standard Cell Naming Format
 
 ```text
 <library>__<function>_<drive_strength>
@@ -1356,7 +1353,7 @@ Breaking it down:
 
 ---
 
-## What is Drive Strength?
+Note:  What is Drive Strength?
 
 Drive strength indicates how much current a gate can source or sink to charge/discharge load capacitance.
 
@@ -1371,7 +1368,7 @@ But:
 
 ---
 
-## Why Larger Cells are Faster?
+- Why Larger Cells are Faster?
 
 The relation is:
 
@@ -1392,7 +1389,7 @@ Therefore:
 
 ---
 
-## Important Point
+- Important Point
 
 Drive strength does **not** change the logic functionality.
 
@@ -1414,7 +1411,7 @@ Only their electrical capability changes.
 
 ---
 
-## Comparison of Different Drive Strength Cells
+- Comparison of Different Drive Strength Cells
 
 | Property | and2_0 | and2_2 | and2_4 |
 |----------|---------|---------|---------|
@@ -1428,13 +1425,13 @@ Only their electrical capability changes.
 
 ---
 
-## Fast Cells vs Slow Cells
+### Fast Cells vs Slow Cells
 
 Liberty libraries contain different types of cells optimized for different purposes.
 
 ---
 
-## Fast Cells
+- Fast Cells
 
 Fast cells usually:
 - use larger transistors
@@ -1455,7 +1452,7 @@ Used in:
 
 ---
 
-## Slow Cells
+- Slow Cells
 
 Slow cells usually:
 - use smaller transistors
@@ -1475,7 +1472,7 @@ Used in:
 
 ---
 
-## How Synthesis Tool Chooses Cells
+- How Synthesis Tool Chooses Cells
 
 During synthesis and optimization:
 - the tool analyzes timing constraints
@@ -1496,7 +1493,7 @@ Cell Sizing / Drive Strength Optimization
 
 ---
 
-## Simple Understanding
+- Simple Understanding
 
 ```text
 Same Logic Function
@@ -1510,7 +1507,7 @@ Different Speed / Area / Power Tradeoffs
 
 ---
 
-## Final Understanding
+- Final Understanding
 
 A liberty file contains many versions of the same logic gates with different:
 - drive strengths
@@ -1525,7 +1522,7 @@ This allows synthesis tools to optimize the design for:
 
 depending on the design constraints and timing requirements.
 
-## What is Slack in Timing Analysis?
+### What is Slack in Timing Analysis?
 
 Slack indicates whether a timing path meets or violates timing requirements.
 
@@ -1548,7 +1545,7 @@ Slack is one of the most important concepts in:
 
 ---
 
-## Simple Timing Path
+- Simple Timing Path
 
 ```text
 Launch Flip-Flop
@@ -1565,7 +1562,7 @@ Data:
 
 ---
 
-## Setup Timing Slack
+- Setup Timing Slack
 
 For setup timing:
 
@@ -1579,7 +1576,7 @@ Where:
 
 ---
 
-### Positive Slack
+- Positive Slack
 
 If:
 
@@ -1613,7 +1610,7 @@ This means:
 
 ---
 
-### Zero Slack
+- Zero Slack
 
 If:
 
@@ -1642,7 +1639,7 @@ Slack = 0ns
 
 ---
 
-### Negative Slack
+- Negative Slack
 
 If:
 
@@ -1675,7 +1672,7 @@ Meaning:
 
 ---
 
-### Simple Understanding
+- Simple Understanding
 
 ```text
 Positive Slack
@@ -1703,7 +1700,7 @@ Depending on slack:
 
 ---
 
-### Case 1 : Negative Slack (Timing Violation)
+- Case 1 : Negative Slack (Timing Violation)
 
 Suppose:
 
@@ -1735,7 +1732,7 @@ Because:
 
 ---
 
-### Case 2 : Large Positive Slack
+- Case 2 : Large Positive Slack
 
 Suppose:
 
@@ -1766,7 +1763,7 @@ Because:
 
 ---
 
-### Relation Between Slack and Cell Size
+- Relation Between Slack and Cell Size
 
 | Slack Condition | Tool Action |
 |----------------|-------------|
@@ -1776,7 +1773,7 @@ Because:
 
 ---
 
-### How Hold Timing is Different?
+- How Hold Timing is Different?
 
 Setup timing checks:
 
@@ -1792,7 +1789,7 @@ Data should not arrive too early
 
 ---
 
-### Hold Slack
+- Hold Slack
 
 For hold timing:
 
@@ -1802,7 +1799,7 @@ Hold Slack = Arrival Time - Required Hold Time
 
 ---
 
-### Hold Violation
+- Hold Violation
 
 If data changes too quickly after clock edge:
 
@@ -1816,7 +1813,7 @@ then:
 
 ---
 
-## Important Point
+- Important Point
 
 Large fast cells can sometimes create hold violations.
 
@@ -1828,7 +1825,7 @@ Because:
 
 ---
 
-#### Example
+- Example
 
 Suppose tool aggressively replaces:
 
@@ -1849,7 +1846,7 @@ Hold Violation
 
 ---
 
-### How Tool Fixes Hold Violations?
+- How Tool Fixes Hold Violations?
 
 To fix hold violations, tools may:
 - insert buffers
@@ -1870,7 +1867,7 @@ Insert Buffer
 
 ---
 
-### Important Tradeoff
+#### Important Tradeoff
 
 ```text
 Faster Cells
@@ -1888,7 +1885,7 @@ May Hurt Setup Timing
 
 ---
 
-### Real Synthesis Optimization Goal
+#### Real Synthesis Optimization Goal
 
 The synthesis and STA tools try to achieve:
 
@@ -1905,7 +1902,7 @@ while also optimizing:
 
 ---
 
-## Final Understanding
+#### Final Understanding
 
 Slack tells the synthesis and timing tools whether a path is:
 - too slow
@@ -1926,9 +1923,9 @@ to balance:
 - performance
 
 
-## Synthesis vs Simulation Mismatch
+# 6. Synthesis vs Simulation Mismatch
 
-## 📌 What is Synthesis vs Simulation Mismatch?
+### 📌 What is Synthesis vs Simulation Mismatch?
 
 A synthesis vs simulation mismatch happens when:
 
@@ -1953,7 +1950,7 @@ This is dangerous because:
 
 ---
 
-## 🧠 Why Does This Happen?
+### 🧠 Why Does This Happen?
 
 Simulation and synthesis tools do not interpret bad RTL code exactly the same way.
 
@@ -1968,7 +1965,7 @@ Simulation and synthesis tools do not interpret bad RTL code exactly the same wa
 
 - So poorly written RTL, incomplete coding styles and ambiguous logic can produce different results in simulation and synthesized hardware.
 
-## 📌 Common Reasons for Mismatch
+- 📌 Common Reasons for Mismatch
 
 Some common causes are:
 
@@ -1982,13 +1979,13 @@ Some common causes are:
 
 ---
 
-## Example : Incomplete Sensitivity List
+- Example : Incomplete Sensitivity List
 
 This is one of the most famous synthesis-simulation mismatch examples.
 
 ---
 
-## ❌ Bad RTL Code
+- ❌ Bad RTL Code
 
 ```verilog
 module bad_mux(
@@ -2010,7 +2007,7 @@ endmodule
 
 ---
 
-## 📌 What is Wrong Here?
+- 📌 What is Wrong Here?
 
 Sensitivity list contains only:
 
@@ -2026,7 +2023,7 @@ They are missing from sensitivity list.
 
 ---
 
-## How Simulator Behaves?
+- How Simulator Behaves?
 
 Simulator executes the `always` block only when:
 
@@ -2071,7 +2068,7 @@ Incorrect/Stale Output
 
 ---
 
-## How Synthesis Tool Behaves?
+- How Synthesis Tool Behaves?
 
 Synthesis tool analyzes RTL logic mathematically.
 
@@ -2098,7 +2095,7 @@ So synthesized hardware behaves correctly.
 
 ---
 
-## Final Result
+- Final Result
 
 ```text
 Simulation Output
@@ -2111,7 +2108,7 @@ This becomes a:
 
 ---
 
-## Understanding with Example
+- Understanding with Example
 
 Suppose:
 
@@ -2127,7 +2124,7 @@ i0 changes 0 → 1
 
 ---
 
-## RTL Simulation
+- RTL Simulation
 
 Simulator checks:
 
@@ -2153,7 +2150,7 @@ y = 0 ❌
 
 ---
 
-## Synthesized Hardware
+- Synthesized Hardware
 
 Actual hardware continuously responds to all inputs.
 
@@ -2171,7 +2168,7 @@ y = 1 ✅
 
 ---
 
-### ✅ Correct RTL Coding Style
+- ✅ Correct RTL Coding Style
 
 Use:
 
@@ -2187,7 +2184,7 @@ always_comb
 
 ---
 
-#### ✅ Correct Version
+- ✅ Correct Version
 
 ```verilog
 module good_mux(
@@ -2209,7 +2206,7 @@ endmodule
 
 ---
 
-#### 📌 Why `@(*)` is Important?
+- 📌 Why `@(*)` is Important?
 
 `@(*)` automatically includes:
 - all input signals
@@ -2228,9 +2225,9 @@ Now:
 
 ---
 
-### 🧠 Simple Understanding
+- 🧠 Simple Understanding
 
-#### Bad RTL
+- Bad RTL
 
 ```text
 Incomplete sensitivity list
@@ -2242,7 +2239,7 @@ Wrong simulation behavior
 
 ---
 
-## Synthesized Hardware
+- Synthesized Hardware
 
 ```text
 Hardware still becomes proper combinational circuit
@@ -2252,7 +2249,7 @@ Hardware output behaves differently
 
 ---
 
-## 📌 Important Lesson
+- 📌 Important Lesson
 
 Simulation correctness does NOT guarantee:
 - synthesis correctness
@@ -2268,7 +2265,7 @@ Synthesized Hardware Output
 
 ---
 
-## ✅ Best Practices to Avoid Mismatch
+- ✅ Best Practices to Avoid Mismatch
 
 - Use `always @(*)` for combinational logic
 - Use non-blocking (`<=`) for sequential logic
@@ -2279,7 +2276,7 @@ Synthesized Hardware Output
 
 ---
 
-# ⚠️ Blocking vs Non-Blocking Assignments
+# 7. Blocking vs Non-Blocking Assignments
 
 Understanding blocking and non-blocking assignments is very important in Verilog because improper usage can create:
 
@@ -2290,7 +2287,7 @@ Understanding blocking and non-blocking assignments is very important in Verilog
 
 ---
 
-# 📌 Two Types of Assignments in Verilog
+- 📌 Two Types of Assignments in Verilog
 
 | Type | Symbol |
 |------|--------|
@@ -2299,9 +2296,9 @@ Understanding blocking and non-blocking assignments is very important in Verilog
 
 ---
 
-# 🧠 Simple Understanding
+- 🧠 Simple Understanding
 
-## Blocking Assignment (`=`)
+#### Blocking Assignment (`=`)
 
 ```text
 Executes statements one-by-one in sequence
@@ -2320,7 +2317,7 @@ Similar to:
 
 ---
 
-## Non-Blocking Assignment (`<=`)
+#### Non-Blocking Assignment (`<=`)
 
 ```text
 All assignments happen in parallel
@@ -2335,9 +2332,9 @@ This behavior matches:
 
 ---
 
-# 📌 Simple Analogy
+- 📌 Simple Analogy
 
-## Blocking (`=`)
+- Blocking (`=`)
 
 Imagine:
 
@@ -2352,7 +2349,7 @@ Operations happen:
 
 ---
 
-## Non-Blocking (`<=`)
+- Non-Blocking (`<=`)
 
 Imagine:
 
@@ -2365,9 +2362,9 @@ This is how:
 
 ---
 
-## Example 1 : Blocking Assignment Problem
+- Example 1 : Blocking Assignment Problem
 
-## ❌ Wrong Sequential Logic
+#### ❌ Wrong Sequential Logic
 
 ```verilog
 module blocking_example(
@@ -2387,7 +2384,7 @@ endmodule
 
 ---
 
-# 🧠 What Simulator Does?
+- 🧠 What Simulator Does?
 
 Suppose before clock edge:
 
@@ -2401,7 +2398,7 @@ At clock edge:
 
 ---
 
-## Step 1
+- Step 1
 
 ```verilog
 q1 = d;
@@ -2415,7 +2412,7 @@ q1 becomes 1
 
 ---
 
-## Step 2
+- Step 2
 
 ```verilog
 q2 = q1;
@@ -2432,7 +2429,7 @@ q2 also becomes 1
 
 ---
 
-# 📌 Final Simulation Result
+- 📌 Final Simulation Result
 
 After one clock edge:
 
@@ -2443,7 +2440,7 @@ q2 = 1
 
 ---
 
-# ⚠️ But Real Hardware Works Differently
+- ⚠️ But Real Hardware Works Differently
 
 In actual hardware:
 - both flip-flops sample inputs simultaneously at clock edge
@@ -2466,7 +2463,7 @@ because:
 
 ---
 
-# ⚠️ Result
+- Result
 
 ```text
 Simulation behavior
@@ -2479,7 +2476,7 @@ This becomes:
 
 ---
 
-# ✅ Correct Sequential Coding Style
+- ✅ Correct Sequential Coding Style
 
 Use:
 
@@ -2491,7 +2488,7 @@ for sequential logic.
 
 ---
 
-# ✅ Correct Version Using Non-Blocking
+- ✅ Correct Version Using Non-Blocking
 
 ```verilog
 module nonblocking_example(
@@ -2511,7 +2508,7 @@ endmodule
 
 ---
 
-# 🧠 What Happens Now?
+- 🧠 What Happens Now?
 
 Before clock edge:
 
@@ -2534,7 +2531,7 @@ q2 gets old q1 → 0
 
 ---
 
-# ✅ Correct Result
+- ✅ Correct Result
 
 After one clock edge:
 
@@ -2549,7 +2546,7 @@ Now:
 
 ---
 
-# 📊 Blocking vs Non-Blocking
+- 📊 Blocking vs Non-Blocking
 
 | Feature | Blocking (`=`) | Non-Blocking (`<=`) |
 |---|---|---|
@@ -2561,9 +2558,9 @@ Now:
 
 ---
 
-# 📌 Recommended Usage
+- 📌 Recommended Usage
 
-## Use Blocking (`=`) For
+#### Use Blocking (`=`) For
 
 ```verilog
 always @(*)
@@ -2579,7 +2576,7 @@ Example:
 
 ---
 
-## Use Non-Blocking (`<=`) For
+#### Use Non-Blocking (`<=`) For
 
 ```verilog
 always @(posedge clk)
@@ -2595,7 +2592,7 @@ Example:
 
 ---
 
-## Simple Rule Used in Industry
+#### Simple Rule Used in Industry
 
 ```text
 Combinational Logic
@@ -2609,7 +2606,7 @@ Use Non-Blocking (<=)
 
 ---
 
-# ⚠️ Why Blocking Causes Problems in Sequential Logic?
+- Why Blocking Causes Problems in Sequential Logic?
 
 Because blocking assignments:
 - update values immediately
@@ -2623,9 +2620,9 @@ So simulation may behave differently from actual synthesized hardware.
 
 ---
 
-# 🧠 Final Understanding
+### 🧠 Final Understanding
 
-## Blocking Assignment (`=`)
+- Blocking Assignment (`=`)
 
 ```text
 Line-by-line immediate execution
@@ -2639,7 +2636,7 @@ Bad for:
 
 ---
 
-## Non-Blocking Assignment (`<=`)
+- Non-Blocking Assignment (`<=`)
 
 ```text
 All register updates happen together
@@ -2653,7 +2650,7 @@ Best for:
 
 ---
 
-# ✅ Final Industry Practice
+- ✅ Final Industry Practice
 
 ```verilog
 always @(*)      → use =
