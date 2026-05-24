@@ -1,6 +1,18 @@
 
 #  RTL Simulation & Synthesis Basics 🧠
 
+## 📚 Repository Contents
+
+- [📘 Spec & RTL Understanding](#-spec--rtl-understanding)
+- [🧪 Need for Testbench and RTL Simulation](#-need-for-testbench-and-rtl-simulation)
+- [⚙️ Synthesizer and Synthesis Flow](#️-synthesizer-and-synthesis-flow)
+- [🔄 RTL vs Gate-Level Netlist Functional Equivalence](#-rtl-vs-gate-level-netlist-functional-equivalence)
+- [📖 Liberty File (.lib), Cell Flavours & Slack Understanding](#-liberty-file-lib-cell-flavours--slack-understanding)
+- [⚠️ Synthesis vs Simulation Mismatch](#️-synthesis-vs-simulation-mismatch)
+- [🔀 Blocking vs Non-Blocking Assignments](#-blocking-vs-non-blocking-assignments)
+- [✅ Final Understanding](#-final-understanding)
+
+
 # 1. Spec & RTL understanding
 
 ## 📌 What is RTL?
@@ -64,6 +76,7 @@ A specification is a document that describes:
 
 
 
+---
 
 # 2. Need for Testbench and RTL Simulation
 
@@ -80,8 +93,6 @@ RTL design may violate the specification due to:
 A **simulator** is a tool that executes the RTL design along with the testbench and evaluates how signals change over time.
 
 Simulation is used to verify whether the RTL design behaves according to the specification or not.
-
----
 
 ### What is a Testbench?
 
