@@ -392,18 +392,6 @@ Optimization techniques may include:
 
 Design constraints guide the synthesis tool during optimization and timing analysis.
 
----
-
-- Timing Analysis and PVT Corners
-
-Timing analysis is performed across different PVT (Process, Voltage, Temperature) corners to ensure reliable circuit operation under different manufacturing and environmental conditions.
-
-This is necessary because transistor characteristics and delays (such as RC delays) vary with:
-- process variations
-- supply voltage
-- temperature
-
-These variations directly affect circuit timing and performance.
 
 ---
 
@@ -456,7 +444,7 @@ write_verilog counter_netlist.v
 
 ---
 
-### Simple Understanding of Synthesis and some special tools
+### Simple Understanding of Synthesis and some special commands
 
 During synthesis, the synthesis tool uses:
 
@@ -466,9 +454,9 @@ During synthesis, the synthesis tool uses:
 
 Finally, the synthesis tool generates a technology-mapped gate-level netlist using standard cells from the target library.
 
-- Some Special Synth Commands
+### Some Special Synth Commands
 
-- 1. `synth` 
+- 1. `synth` command
 
 `synth` is a high-level synthesis command in Yosys.
 
