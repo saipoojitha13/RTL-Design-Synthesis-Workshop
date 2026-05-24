@@ -908,7 +908,7 @@ iverilog good_mux_netlist.v tb_good_mux.v
 ```bash
 gtkwave waveform.vcd
 ```
-- Note: With the following above 5 steps, we can understand, in design we are verifying have any synthesis-simulation mismatch or not.
+- Note: With the following above steps, we can understand, in design we are verifying have any synthesis-simulation mismatch or not.
 ---
 
 ### a simple understanding of Complete GLS Flow
